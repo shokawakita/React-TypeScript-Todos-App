@@ -1,6 +1,7 @@
 import React,{useState, useCallback, useEffect} from "react";
 import {Lists, CreateList} from './assets/components/index';
 
+// todoの型宣言
 export type Todo = {
   id: number
   title: string | number
@@ -8,8 +9,17 @@ export type Todo = {
 }
 
 const App = () => {
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const [todos, setTodos] = useState<Todo[]>(() => {
+    const saveText = localStorage.getItem("todos")!;
+    const sampleValue:Todo[] = JSON.parse(saveText);
+    return sampleValue || [];
+    });
   const [value, setValue] = useState<string | number>("")
+
+  // ローカルストレージにデータ保存
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));  
+  }, [todos]);
 
   //Todoリストの作成
   const createList = useCallback((e: any) => {
@@ -50,7 +60,7 @@ const App = () => {
     const newTodos = todos.filter(todo => {
       return todo !== index
     })
-
+    // todoのIDの更新
     for (let i = 0; i < newTodos.length; i++) {
       newTodos[i].id =  i + 1;
     }
@@ -71,7 +81,7 @@ const App = () => {
         value={value}
         create={createList} 
         update={updateTodo}
-        />
+      />
     </main>
   )
 }
