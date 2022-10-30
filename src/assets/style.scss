@@ -1,0 +1,57 @@
+body {
+  margin: 0;
+
+  main {
+    margin: 32px 64px;
+    border: 2px black solid;
+    border-radius: 12px;
+    height: 80vh;
+
+    .title {text-align: center;}
+
+    ul {
+      margin: 0 auto;
+      text-decoration: none;
+      list-style: none;
+      padding: 0;
+      
+      .todo-list {
+        z-index: 1;
+        background-color: gray;
+        margin: 8px auto 0 auto;
+        opacity: .7;
+        border-radius: 4px;
+        transition: opacity .3s;
+        width: calc(100% - 128px);
+
+        &:hover {
+          opacity: .5
+        }
+      }
+
+      span { 
+        cursor: pointer;
+        margin-left: 128px;
+        z-index: 4;
+
+        &:hover {
+          display: inline-block;
+          padding: 0 4px;
+          border-radius: 2px;
+          background-color: red;
+        }
+      }
+    }
+
+    .create-form {
+      margin-top: 32px;
+      outline: 2px red solid; 
+      text-align: center;
+
+      input {
+        padding: 6px 24px;
+        font-size: 18px;
+      }
+    } 
+  }
+}
